@@ -12,4 +12,4 @@ if(!$sources.Count){throw 'Lua sources not found'}
 if($LASTEXITCODE){throw 'Receiver build failed'}
 Copy-Item "$root/src/RhyLiveFace.lua" "$package/reframework/autorun"
 foreach($name in @('face_math.lua','default_profile.lua','localization.lua')){Copy-Item "$root/src/$name" "$package/reframework/autorun/RhyLiveFace"}
-Copy-Item "$root/README.md","$root/ThirdPartyNotices.txt" $package
+Copy-Item "$root/README.md","$root/ThirdPartyNotices.txt","$root/LICENSE" $package

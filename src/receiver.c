@@ -12,6 +12,8 @@
 
 #define EXPORT __declspec(dllexport)
 #define FACE_COUNT 52
+#define RHYLIVE_PRODUCT_VERSION "0.2.0"
+#define RHYLIVE_RECEIVER_VERSION "0.2.0"
 static const char *names[FACE_COUNT] = {
  "browDownLeft","browDownRight","browInnerUp","browOuterUpLeft","browOuterUpRight",
  "cheekPuff","cheekSquintLeft","cheekSquintRight","eyeBlinkLeft","eyeBlinkRight",
@@ -148,7 +150,9 @@ static int l_poll(lua_State *L) {
 }
 void rhylive_bind_lua(lua_State *L) {
  static const luaL_Reg funcs[]={{"start",l_start},{"stop",l_stop},{"poll",l_poll},{NULL,NULL}};
- luaL_newlib(L,funcs);lua_pushstring(L,"0.1.0");lua_setfield(L,-2,"version");
+ luaL_newlib(L,funcs);lua_pushstring(L,RHYLIVE_RECEIVER_VERSION);lua_setfield(L,-2,"version");
+ lua_pushstring(L,RHYLIVE_PRODUCT_VERSION);lua_setfield(L,-2,"product_version");
+ lua_pushstring(L,RHYLIVE_RECEIVER_VERSION);lua_setfield(L,-2,"receiver_version");
  lua_setglobal(L,"rhylive_native");
 }
 EXPORT void reframework_plugin_required_version(REFrameworkPluginVersion *v) {
@@ -158,6 +162,6 @@ EXPORT void reframework_plugin_required_version(REFrameworkPluginVersion *v) {
 EXPORT bool reframework_plugin_initialize(const REFrameworkPluginInitializeParam *p) {
  if(!p || !p->functions || !p->functions->on_lua_state_created) return false;
  bool ok=p->functions->on_lua_state_created(rhylive_bind_lua);
- if(ok && p->functions->log_info) p->functions->log_info("[RhyLiveFace] 0.1.0 ready; receiver starts from Lua UI");
+ if(ok && p->functions->log_info) p->functions->log_info("[RhyLiveFace] product " RHYLIVE_PRODUCT_VERSION "; receiver " RHYLIVE_RECEIVER_VERSION " ready; receiver starts from Lua UI");
  return ok;
 }
