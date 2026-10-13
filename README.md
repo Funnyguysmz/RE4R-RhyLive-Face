@@ -39,6 +39,8 @@ The receiver is also the data source for the in-game shape-key panel: [RE4R-Shap
 
 On the shape-key route, RhyLive Face receives the phone data, System drives model shape keys, Studio supplies the desktop interface, and the exporter creates the model channels. The phone's RhyLive app is a separate application, not an open-source project published by this toolchain.
 
+System's [v0.4.5-rc.1 prerelease](https://github.com/Funnyguysmz/RE4R-ShapeKey-System/releases/tag/v0.4.5-rc.1) includes receiver-channel subsets, `native_map_file`, per-channel diagnostics and runtime weight bounds, with generic Leon and mouth9 mappings. It retains the 91/9/NoTap routes and does not change the RhyLive receiving protocol. Use a profile matched to your model; the 94-channel integrated route still needs in-game confirmation.
+
 The 0.70.6 exporter integration adds two RE4 options: nine native zero-displacement receiver channels, and packed displacements with the model's base custom normals without `normalRecalc` or a requirement for fins. The derivative is available as the [v0.70.6-re4r.1 prerelease](https://github.com/Funnyguysmz/RE-Mesh-Editor-BlendShape/releases/tag/v0.70.6-re4r.1); both RE4 options default to off. It preserves existing normal directions; it does not create toon normals or distinct normals for each expression. The author's Xiaoyu standalone 85-channel normals package has received positive in-game user feedback. The new 94-channel combination (85 custom channels + nine native receiver channels + normals) remains pending in-game confirmation; offline export/readback checks do not establish that result. Use System's matching mouth9 profile and native mapping, or Studio's matching adapted runtime; keep the bone "Drive face" off for this route.
 
 ### Requirements
@@ -138,6 +140,8 @@ This repository contains no character models, game assets, personal settings or 
 | [RE-Mesh-Editor-BlendShape](https://github.com/Funnyguysmz/RE-Mesh-Editor-BlendShape) | Blender 导出器 Fork，制作模型形态键通道；GPLv3，与 MIT 运行时工具分别许可 |
 
 走形态键路线时，RhyLive Face 负责接收手机数据，System 驱动模型形态键，Studio 提供桌面界面，导出器制作模型通道。手机 RhyLive App 是独立应用，不是本工具链发布的开源项目。
+
+System [v0.4.5-rc.1 预发布](https://github.com/Funnyguysmz/RE4R-ShapeKey-System/releases/tag/v0.4.5-rc.1) 已包含接收口子集、`native_map_file`、逐口诊断和实时权重边界，随包提供通用 Leon 与 mouth9 映射。它保留 91/9/NoTap 路线，不改变 RhyLive 接收协议。仍须使用匹配模型的 profile；94 通道集成路线继续等待实机确认。
 
 0.70.6 导出器集成新增两个 RE4 开关：九个原生零位移接收口，以及 packed 位移加模型基础自定义法线，不使用 `normalRecalc`，无需 fins。派生版已公开为 [v0.70.6-re4r.1 预发布](https://github.com/Funnyguysmz/RE-Mesh-Editor-BlendShape/releases/tag/v0.70.6-re4r.1)，两个 RE4 开关默认关闭。它保留已有法线方向，不生成三渲二法线或逐表情独立法线。用户已反馈小玉独立 85 通道法线包没问题；新的 94 通道组合（85 个自定义通道 + 九个原生接收口 + 法线）仍待实机确认，离线导出/回读通过不代表这一组合已实测通过。使用 System 配套的 mouth9 profile 和原生映射，或 Studio 配套适配运行时；此路线保持骨骼 Drive face 关闭。
 
