@@ -15,7 +15,7 @@ A REFramework plugin for Resident Evil 4 Remake that
 
 The receiver is also the data source for the in-game shape-key panel: [RE4R-ShapeKey-System](https://github.com/Funnyguysmz/RE4R-ShapeKey-System) reads `rhylive_native.poll()` directly. For that route you only need to **start the receiver**; do not also enable the bone "Drive face".
 
-### How the three repositories fit together
+### How the tools fit together
 
 ```
  phone (RhyLive app, ARKit 52, UDP port 9000)
@@ -35,6 +35,11 @@ The receiver is also the data source for the in-game shape-key panel: [RE4R-Shap
 | [RE4R-RhyLive-Face](https://github.com/Funnyguysmz/RE4R-RhyLive-Face) | receiver DLL and bone-driven face panel (this repo) |
 | [RE4R-ShapeKey-System](https://github.com/Funnyguysmz/RE4R-ShapeKey-System) | in-game shape-key panel |
 | [RE4R-ShapeKey-Studio](https://github.com/Funnyguysmz/RE4R-ShapeKey-Studio) | desktop GUI, bridge DLL, installer (its package also contains a receiver build and an adapted copy of the panel scripts) |
+| [RE-Mesh-Editor-BlendShape](https://github.com/Funnyguysmz/RE-Mesh-Editor-BlendShape) | Blender exporter fork for creating model shape-key channels; GPLv3, separate from the MIT runtime tools |
+
+On the shape-key route, RhyLive Face receives the phone data, System drives model shape keys, Studio supplies the desktop interface, and the exporter creates the model channels. The phone's RhyLive app is a separate application, not an open-source project published by this toolchain.
+
+The local 0.70.6 exporter integration adds two RE4 options: nine native zero-displacement receiver channels, and packed displacements with the model's base custom normals without `normalRecalc` or a requirement for fins. As of 2026-10-13, the public fork is available; migration of this integration and its release are still being prepared. The fork's upstream copy alone is not the completed 0.70.6 derivative. It preserves existing normal directions; it does not create toon normals or distinct normals for each expression. The author's Xiaoyu standalone 85-channel normals package has received positive in-game user feedback. The new 94-channel combination (85 custom channels + nine native receiver channels + normals) remains pending in-game confirmation; offline export/readback checks do not establish that result. Use System's matching mouth9 profile and native mapping, or Studio's matching adapted runtime; keep the bone "Drive face" off for this route.
 
 ### Requirements
 
@@ -110,7 +115,7 @@ This repository contains no character models, game assets, personal settings or 
 
 这个接收器同时是游戏内形态键面板的数据来源：[RE4R-ShapeKey-System](https://github.com/Funnyguysmz/RE4R-ShapeKey-System) 直接读取 `rhylive_native.poll()`。走形态键路线时只需**启动接收**，不要同时开启骨骼 Drive face。
 
-### 三个仓库如何配合
+### 各工具如何配合
 
 ```
  手机（RhyLive，ARKit 52，UDP 端口 9000）
@@ -130,6 +135,11 @@ This repository contains no character models, game assets, personal settings or 
 | [RE4R-RhyLive-Face](https://github.com/Funnyguysmz/RE4R-RhyLive-Face) | 接收 DLL 与骨骼驱动面板（本仓库） |
 | [RE4R-ShapeKey-System](https://github.com/Funnyguysmz/RE4R-ShapeKey-System) | 游戏内形态键面板 |
 | [RE4R-ShapeKey-Studio](https://github.com/Funnyguysmz/RE4R-ShapeKey-Studio) | 桌面 GUI、桥接 DLL、安装器（其安装包也含接收器构建和经过适配的面板脚本副本） |
+| [RE-Mesh-Editor-BlendShape](https://github.com/Funnyguysmz/RE-Mesh-Editor-BlendShape) | Blender 导出器 Fork，制作模型形态键通道；GPLv3，与 MIT 运行时工具分别许可 |
+
+走形态键路线时，RhyLive Face 负责接收手机数据，System 驱动模型形态键，Studio 提供桌面界面，导出器制作模型通道。手机 RhyLive App 是独立应用，不是本工具链发布的开源项目。
+
+本地 0.70.6 导出器集成新增两个 RE4 开关：九个原生零位移接收口，以及 packed 位移加模型基础自定义法线，不使用 `normalRecalc`，无需 fins。截至 2026-10-13，公开 Fork 已建立，集成改动的迁入与 Release 仍在准备；Fork 的上游副本不等于已完成的 0.70.6 派生版。它保留已有法线方向，不生成三渲二法线或逐表情独立法线。用户已反馈小玉独立 85 通道法线包没问题；新的 94 通道组合（85 个自定义通道 + 九个原生接收口 + 法线）仍待实机确认，离线导出/回读通过不代表这一组合已实测通过。使用 System 配套的 mouth9 profile 和原生映射，或 Studio 配套适配运行时；此路线保持骨骼 Drive face 关闭。
 
 ### 需求
 
